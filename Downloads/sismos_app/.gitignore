@@ -1,0 +1,25 @@
+
+# Variables privadas
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# Python y Django
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+db.sqlite3
+*.sqlite3
+staticfiles/
+
+# React y Node
+node_modules/
+dist/
+
+# Entorno de desarrollo
+.vscode/
+.idea/
+.DS_Store

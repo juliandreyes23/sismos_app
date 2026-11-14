@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { getSismos } from '../../services/api';
 
-function Listado() {
+function Listado({ actualizar }) {
     const [filtros, setFiltros] = useState({
         page: 1,
         search: '',
@@ -23,12 +23,31 @@ function Listado() {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        getSismos(filtros)
-            .then((respuesta) => setDatos(respuesta))
-            .catch((error) => setError(error.message))
-            .finally(() => setCargando(false));
+        let activo = true;
 
-    }, [filtros]);
+        getSismos(filtros)
+            .then((respuesta) => {
+                if (activo) {
+                    setDatos(respuesta);
+                    setError('');
+                }
+            })
+            .catch((error) => {
+                if (activo) {
+                    setError(error.message);
+                }
+            })
+            .finally(() => {
+                if (activo) {
+                    setCargando(false);
+                }
+            });
+
+        return () => {
+            activo = false;
+        };
+
+    }, [filtros, actualizar]);
 
     function cambiarFiltro(campo, valor) {
         setCargando(true);

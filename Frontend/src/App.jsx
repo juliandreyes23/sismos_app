@@ -18,6 +18,7 @@ function App() {
 
     const [mensaje, setMensaje] = useState('');
     const [cargando, setCargando] = useState(false);
+    const [actualizarListado, setActualizarListado] = useState(0);
 
     const filtros = {
         anio: '',
@@ -31,6 +32,9 @@ function App() {
 
         try {
             const resultado = await sincronizar();
+
+            setActualizarListado(prev => prev + 1);
+
             setMensaje(
                 `Sincronización completada. Nuevos sismos: ${resultado.sincronizados}`
             );
@@ -101,7 +105,9 @@ function App() {
                     />
                 ) : (
                     <>
-                        {seccion === 'listado' && <Listado />}
+                        {seccion === 'listado' && (
+                            <Listado actualizar={actualizarListado} />
+                        )}
                         {seccion === 'stats' && <Stats />}
                         {seccion === 'mapa' && (
                             <MapaSismos filtros={filtros} />

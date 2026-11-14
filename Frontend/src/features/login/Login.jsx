@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { login } from "../../services/api";
 
-function Login({ onLogin }) {
+function Login({ onLogin, onVolver }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -24,21 +24,25 @@ function Login({ onLogin }) {
     }
 
     return (
-        <div className="login-page">
-            <section className="login-card">
+        <div className="login-pagina">
+            <section className="login-tarjeta">
                 <div className="login-logo">
-                    <span>⌁</span>
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 34h8l4-14 5 28 5-34 5 26 4-12 3 6h14"
+                            fill="none" stroke="#38bdf8" strokeWidth="4"
+                            strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                 </div>
 
-                <h2>Bienvenido</h2>
+                <h2>Bienvenido de nuevo</h2>
 
-                <p className="login-description">
+                <p className="login-descripcion">
                     Ingresa a tu cuenta para consultar la actividad sísmica
                     en tiempo real.
                 </p>
 
                 <form onSubmit={iniciarSesion}>
-                    <div>
+                    <div className="campo">
                         <label htmlFor="username">Nombre de usuario</label>
                         <input
                             id="username"
@@ -46,11 +50,12 @@ function Login({ onLogin }) {
                             placeholder="Ingresa tu usuario"
                             value={username}
                             onChange={e => setUsername(e.target.value)}
+                            autoComplete="username"
                             required
                         />
                     </div>
 
-                    <div>
+                    <div className="campo">
                         <label htmlFor="password">Contraseña</label>
                         <input
                             id="password"
@@ -58,17 +63,31 @@ function Login({ onLogin }) {
                             placeholder="Ingresa tu contraseña"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
+                            autoComplete="current-password"
                             required
                         />
                     </div>
 
-                    <button type="submit" disabled={cargando}>
+                    <button type="submit" className="btn-primario" disabled={cargando}>
                         {cargando ? 'Verificando acceso...' : 'Iniciar sesión'}
                     </button>
                 </form>
 
                 {error && (
                     <p className="login-error">{error}</p>
+                )}
+
+                {onVolver && (
+                    <a
+                        href="#inicio"
+                        className="login-volver"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onVolver();
+                        }}
+                    >
+                        ← Volver al inicio
+                    </a>
                 )}
             </section>
         </div>

@@ -1,8 +1,27 @@
 
 :root {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #e2e8f0;
-    background: #0b1220;
+    /* Paleta profesional: azul marino profundo + acento azul cielo */
+    --fondo: #0a1220;
+    --fondo-suave: #0f1b2e;
+    --superficie: #131f33;
+    --superficie-alta: #182740;
+    --borde: #24354f;
+    --borde-suave: #1c2c44;
+    --texto: #e6edf7;
+    --texto-suave: #9fb0c8;
+    --texto-muy-suave: #6b7d99;
+    --acento: #3b82f6;
+    --acento-fuerte: #2563eb;
+    --acento-suave: rgba(59, 130, 246, 0.14);
+    --acento-borde: rgba(59, 130, 246, 0.35);
+    --cian: #38bdf8;
+    --exito: #34d399;
+    --peligro: #f87171;
+    --alerta: #fbbf24;
+
+    font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+    color: var(--texto);
+    background: var(--fondo);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -17,7 +36,7 @@ body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    background: #0b1220;
+    background: var(--fondo);
 }
 
 #root {
@@ -36,7 +55,7 @@ button {
 }
 
 h1, h2, h3, h4 {
-    color: #f8fafc;
+    color: #f4f8fd;
 }
 
 p {
@@ -44,6 +63,26 @@ p {
 }
 
 ::selection {
-    background: #0891b2;
+    background: var(--acento);
     color: white;
+}
+
+/* Barra de desplazamiento discreta */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--fondo);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #22334d;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2d4262;
 }

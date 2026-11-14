@@ -14,6 +14,8 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
 
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',

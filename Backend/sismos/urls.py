@@ -1,16 +1,14 @@
-from django.contrib import admin
-from django.urls import include, path, re_path
-from django.views.generic import TemplateView
-from rest_framework.authtoken.views import obtain_auth_token
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+from .views import SismoViewSet, stats, sincronizar
+
+router = DefaultRouter()
+router.register('sismos', SismoViewSet, basename='sismo')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('sismos.urls')),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/login/', obtain_auth_token),
-
-    re_path(
-        r'^(?!api/|admin/|api-auth/|static/).*$', 
-        TemplateView.as_view(template_name='index.html')
-    ),
+    path('sismos/stats/', stats, name='sismos-stats'),
+    path('sismos/sincronizar/', sincronizar, name='sismos-sincronizar'),
+    path('', include(router.urls)),
 ]
